@@ -1,0 +1,84 @@
+The application is a  Demo order Event service
+
+Its job is simple: 
+1.Accept the requests from users
+2.Generate events
+3.Send those events to APACHE kafka
+4.Expose the metrics so Prometheus can monitor it 
+5.Run inside containers  managed by Kubernetes 
+
+
+High level workflow 
+
+User
+  |
+HTTP Request
+  |
+Kubernetes Service
+  |
+Application Pod
+  |
+Kafka Event
+  |
+Monitoring
+
+
+Main things the APP will DO: 
+
+1.Accepts the requests 
+  POST  /orders
+Ex: 
+{
+"product": "phone",
+"price": 500
+}
+The app simply receives the requests 
+
+2.Crete an Event 
+The application converts the requests into an event message 
+Ex: 
+{
+ "event": "order_created",
+ "product": "phone",
+ "price": 500,
+ "timestamp": "2026-03-05"
+}
+
+3.Send Event to Kafka
+The event is published to  a topic in Apache kafka
+
+Ex:  Topic:  Orders
+Kafka acts as an event pipeline 
+
+Why Kafka exits in this project
+Kafka is included so you can practice Devops tasks such as : 
+*Deploying kafka on Kubernets
+*managing Kafka brokers
+*Creating topics
+*Monitoring kafka metrics
+*YOu are not focusing on complex event processing ,oonly  running the kafka platform 
+
+3.Monitoring Flow
+The application Exposes a metrics endpoint: 
+
+GET /metrics
+These metrics are collected by the Prometheus 
+
+Example metrics:
+request_count
+request_latency 
+error_rate
+
+Then dashboard are built in Grafana
+Examaple dashboard panels are : 
+* requests per second
+* Container CPU usage
+* memory usage
+* pod restart 
+
+
+4.The application is packaged into  Image by using the docker file and stored in the docker file 
+4.Deployment will happen automatically through CI/CD both the Github action and the jenkins will be used
+5.Containers run in kubernetes 
+6.The cloud infrastructure willb e created using the terraform 
+
