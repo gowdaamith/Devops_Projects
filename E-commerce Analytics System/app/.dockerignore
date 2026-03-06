@@ -1,0 +1,50 @@
+# Node modules (installed inside container)
+node_modules
+npm-debug.log
+
+# Build output (builder stage will recreate it)
+dist
+build
+
+# Git
+.git
+.gitignore
+
+# Environment variables / secrets
+.env
+.env.*
+
+# Logs
+logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker
+Dockerfile
+docker-compose.yml
+.dockerignore
+
+# CI/CD
+.github
+.gitlab
+
+# Tests
+test
+tests
+coverage
+
+# Documentation
+README.md
+docs
+
+# IDE files
+.vscode
+.idea
+
+# Temporary files
+tmp
+temp
+*.tmp
